@@ -10,9 +10,10 @@ function useDataLoader(
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
   useEffect(() => {
+    setLoading(true);
     let uri = `https://api.spacexdata.com/v3/`;
     if (upcoming) {
-      uri += `launches/upcoming?`;
+      uri += `launches/upcoming`;
     } else {
       uri += `launches?`;
     }
@@ -45,9 +46,11 @@ function useDataLoader(
           });
           setData(formattedData);
           setTotal(formattedData.length);
+          setLoading(false);
         });
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }, [rocketName, missionStatus, upcoming]);
 

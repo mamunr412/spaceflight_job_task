@@ -1,4 +1,13 @@
-import { Checkbox, Input, Space, Select, Row, Pagination, Empty } from "antd";
+import {
+  Checkbox,
+  Input,
+  Space,
+  Select,
+  Row,
+  Pagination,
+  Empty,
+  Spin,
+} from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import type { PaginationProps } from "antd";
 import { useSearchParams } from "react-router-dom";
@@ -19,10 +28,11 @@ const HomePage = () => {
   const rocketName = searchParams.get("rocketName");
   const missionStatus = searchParams.get("status");
   const [upcoming, setUpcoming] = useState<boolean>(false);
-  const { data, total } = useDataLoader(rocketName, missionStatus, upcoming);
-
-  // const [loading, setLoading] = useState(false);
-
+  const { data, total, loading } = useDataLoader(
+    rocketName,
+    missionStatus,
+    upcoming
+  );
   const onShowSizeChange: PaginationProps["onShowSizeChange"] = (
     current,
     pageSize
@@ -43,23 +53,30 @@ const HomePage = () => {
           marginTop: "10px",
         }}
       >
-        <Input.Search
-          placeholder="input search text"
-          style={{ width: 350 }}
-          onSearch={(e) =>
-            setSearchParams((prv) => {
-              prv.set("rocketName", e);
-              return prv;
-            })
-          }
-          enterButton
-        />
+        <div style={{ marginTop: "20px" }}>
+          <Input.Search
+            placeholder="input search text"
+            style={{ width: 350 }}
+            onSearch={(e) =>
+              setSearchParams((prv) => {
+                prv.set("rocketName", e);
+                return prv;
+              })
+            }
+            enterButton
+          />
+        </div>
         <div>
-          <Checkbox
-            onChange={(e: CheckboxChangeEvent) => setUpcoming(e.target.checked)}
-          >
-            show upcoming only
-          </Checkbox>
+          <div style={{ textAlign: "end", marginBottom: "5px" }}>
+            <Checkbox
+              onChange={(e: CheckboxChangeEvent) =>
+                setUpcoming(e.target.checked)
+              }
+            >
+              show upcoming only
+            </Checkbox>
+          </div>
+
           <Select
             placeholder="By Launch Status"
             style={{ width: 220, marginRight: "20px" }}
@@ -94,22 +111,35 @@ const HomePage = () => {
 
       {/* spaceflights card section  */}
       <Row style={{ marginTop: "50px" }} gutter={[16, 16]}>
-        {data.length ? (
-          <>
-            {data.map((sMission, index) => (
-              <ShowData sMission={sMission} key={index} />
-            ))}
-          </>
-        ) : (
-          <div
-            style={{ textAlign: "center", width: "100%", marginTop: "5rem" }}
-          >
-            <Empty />
+        {loading ? (
+          <div style={{ textAlign: "center", width: "100%" }}>
+            <Spin />
           </div>
+        ) : (
+          <>
+            {" "}
+            {data.length ? (
+              <>
+                {data.map((sMission, index) => (
+                  <ShowData sMission={sMission} key={index} />
+                ))}
+              </>
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  marginTop: "5rem",
+                }}
+              >
+                <Empty />
+              </div>
+            )}
+          </>
         )}
       </Row>
 
-      {data.length ? (
+      {data.length && !loading ? (
         <Space
           align="center"
           style={{
