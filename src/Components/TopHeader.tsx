@@ -2,7 +2,10 @@ import { Typography, Space } from "antd";
 
 const TopHeader = () => {
   return (
-    <Space align="center" style={{ width: "100%", justifyContent: "center" }}>
+    <Space
+      align="center"
+      style={{ width: "100%", justifyContent: "center", marginBottom: "2rem" }}
+    >
       <div>
         <Typography.Title level={2} style={{ paddingLeft: "40px" }}>
           Spaceflight details

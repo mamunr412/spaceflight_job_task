@@ -3,8 +3,8 @@ import { dateFormat } from "../utils/DateFormate";
 import { IMission } from "../Types/Types";
 const ShowData = ({ sMission }: { sMission: IMission }) => {
   return (
-    <Col xs={24} md={16} lg={8}>
-      <Card style={{ maxWidth: 400, textAlign: "center" }}>
+    <Col xs={24} md={12} lg={8}>
+      <Card style={{ textAlign: "center" }}>
         <img src={sMission.photo} alt="" height={124} width={124} />
         <div style={{ paddingTop: "20px" }}>
           <Typography
