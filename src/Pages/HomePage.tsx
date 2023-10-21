@@ -82,6 +82,7 @@ const HomePage = () => {
             <Col xs={24} md={12} lg={12}>
               <Select
                 placeholder="By Launch Status"
+                value={missionStatus === "true" ? "Success" : "Failed"}
                 style={{ width: "100%", marginRight: "20px" }}
                 onChange={(e) =>
                   setSearchParams((prv) => {
