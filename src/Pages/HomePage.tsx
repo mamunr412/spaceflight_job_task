@@ -13,7 +13,7 @@ import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useSearchParams } from "react-router-dom";
 import TopHeader from "../Components/TopHeader";
 import useDataLoader from "../Hook/UseDataLoad";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ShowData from "../Components/ShowData";
 
 const HomePage = () => {
@@ -36,15 +36,6 @@ const HomePage = () => {
   const indexOfLastPost = Number(currentPage) * 9;
   const indexOfFirstPost = indexOfLastPost - 9;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-
-  useEffect(() => {
-    if (data.length < 1) {
-      setSearchParams((prv) => {
-        prv.set("currentPage", String(1));
-        return prv;
-      });
-    }
-  }, [currentPage, missionStatus, rocketName]);
 
   return (
     //   style={{ margin: "1rem 20rem" }}
