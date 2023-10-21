@@ -9,17 +9,14 @@ function useDataLoader(
   const [data, setData] = useState<IMission[]>([]);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9);
 
-  console.log(total);
   useEffect(() => {
     setLoading(true);
     let uri = `https://api.spacexdata.com/v3/`;
     if (upcoming) {
-      uri += `launches/upcoming`;
+      uri += `launches/upcoming?`;
     } else {
-      uri += `launches?limit=${pageSize}&offset=${(page - 1) * pageSize}&`;
+      uri += `launches?`;
     }
     if (rocketName) {
       uri += `rocket_name=${rocketName}&`;

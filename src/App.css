@@ -23,3 +23,11 @@
     text-align: end;
   }
 }
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+  .container {
+    margin: 1rem 6rem;
+  }
+  .upcoming {
+    text-align: end;
+  }
+}

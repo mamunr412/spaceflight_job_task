@@ -10,37 +10,43 @@ import {
   Col,
 } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import type { PaginationProps } from "antd";
 import { useSearchParams } from "react-router-dom";
 
 import TopHeader from "../Components/TopHeader";
 
 import useDataLoader from "../Hook/UseDataLoad";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShowData from "../Components/ShowData";
 
 const HomePage = () => {
   let [searchParams, setSearchParams] = useSearchParams({
     rocketName: "",
     status: "",
-    date: "",
     upcoming: "",
+    currentPage: "",
   });
   const rocketName = searchParams.get("rocketName");
   const missionStatus = searchParams.get("status");
+  const currentPage: string = searchParams.get("currentPage") || "1";
   const [upcoming, setUpcoming] = useState<boolean>(false);
   const { data, total, loading } = useDataLoader(
     rocketName,
     missionStatus,
     upcoming
   );
-  const onShowSizeChange: PaginationProps["onShowSizeChange"] = (
-    current,
-    pageSize
-  ) => {
-    console.log(current, pageSize);
-  };
+  // Get current posts
+  const indexOfLastPost = Number(currentPage) * 9;
+  const indexOfFirstPost = indexOfLastPost - 9;
+  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
+  useEffect(() => {
+    if (data.length < 1) {
+      setSearchParams((prv) => {
+        prv.set("currentPage", String(1));
+        return prv;
+      });
+    }
+  }, [currentPage, missionStatus, rocketName]);
   return (
     //   style={{ margin: "1rem 20rem" }}
     <div className="container">
@@ -122,7 +128,7 @@ const HomePage = () => {
             {" "}
             {data.length ? (
               <>
-                {data.map((sMission, index) => (
+                {currentPosts.map((sMission, index) => (
                   <ShowData sMission={sMission} key={index} />
                 ))}
               </>
@@ -151,9 +157,14 @@ const HomePage = () => {
           }}
         >
           <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            defaultCurrent={3}
+            showSizeChanger={false}
+            current={Number(currentPage)}
+            onChange={(page) =>
+              setSearchParams((prv) => {
+                prv.set("currentPage", String(page));
+                return prv;
+              })
+            }
             total={total}
           />
         </Space>
