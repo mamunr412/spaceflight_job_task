@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
+## Spaceflight
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Spaceflight is an application designed to filter and present data from SpaceX JSON data. It is built using modern technologies, including React, TypeScript, Ant Design, JavaScript, and CSS, to provide an efficient and user-friendly experience.
 
-Currently, two official plugins are available:
+## Installation and Setup Instructions
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before setting up the application, ensure that you have Node.js and npm installed on your machine.
 
-## Expanding the ESLint configuration
+## Installation:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Clone down this repository. You will need node and npm installed globally on your machine.
 
-- Configure the top-level `parserOptions` property like this:
+Installation:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+npm install
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To Start Server:
+
+npm run dev
+
+To Visit App:
+
+localhost:3000
+
+## Key Features
+
+Spaceflight offers the following key features:
+
+Data Filtering: Easily filter data by rocket name, mission status, and upcoming missions.
+Pagination: View search results with convenient pagination. Each page displays up to 9 results for a better user experience.
+This application provides a seamless and intuitive way to explore space exploration data from SpaceX.
