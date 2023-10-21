@@ -2,7 +2,7 @@
 
 Spaceflight is an application designed to filter and present data from SpaceX JSON data. It is built using modern technologies, including React, TypeScript, Ant Design, JavaScript, and CSS, to provide an efficient and user-friendly experience.
 
-Live demo: https://starcruise.netlify.app/?rocketName=&status=&upcoming=&currentPage=1
+Live demo: https://starcruise.netlify.app
 
 ## Installation and Setup Instructions
 
